@@ -101,8 +101,10 @@ class StaffController extends BaseController
         $role = $service->getMenu($context);
 
         // 增加低代码标识
-        $menuService = new MenuService();
-        $role        = $menuService->attach(new DataContext(['data' => $role]));
+        if (is_file(ROOT . DS . 'comp/lesscode/service/MenuService.php')) {
+            $menuService = new MenuService();
+            $role        = $menuService->attach(new DataContext(['data' => $role]));
+        }
 
         $userinfo = $this->session->get('userinfo');
         $result   = array(
