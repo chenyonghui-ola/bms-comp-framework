@@ -1,0 +1,20 @@
+{
+    "require": {
+        "whichbrowser/parser": "^2.1",
+        "elasticquent/elasticquent": "^1.0",
+        "illuminate/pagination": "5.8.0",
+        "illuminate/validation": "v5.8.36",
+        "phpunit/phpunit": "^7.0",
+        "phpunit/dbunit": "^4.0",
+        "phpunit/php-invoker": "^2.0",
+        "phalcon/incubator": "^3.4",
+        "mockery/mockery": "^1.3",
+        "guzzlehttp/guzzle": "6.5.2",
+        "aliyun/aliyun-tablestore-sdk-php": "^5.1"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "../../tests/"
+        }
+    }
+}
