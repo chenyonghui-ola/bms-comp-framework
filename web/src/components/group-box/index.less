@@ -1,0 +1,20 @@
+.group-box {
+    position: relative;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-top: 32px;
+}
+
+.group-box-inner {
+    padding: 16px;
+}
+
+.group-box::before {
+    content: attr(title);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translate(-50%, -50%);
+    padding: 0 10px;
+    background-color: #fff;
+}

@@ -1,0 +1,79 @@
+.page {
+    :global {
+        .ant-btn {
+            height: 40px;
+            width: 124px;
+        }
+    }
+
+    .page-footer {
+        margin-top: 30px;
+        text-align: center;
+    }
+}
+
+
+.page-card {
+    padding: 0 16px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+    margin-top: 16px;
+
+    :global {
+
+    }
+
+    .pc-header {
+        height: 46px;
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+    }
+
+    .pc-body {
+        padding: 10px 0 16px;
+        border-top: 1px solid #EAEDF3;
+
+        .pc-tabs-first {
+            :global {
+                .ant-tabs-tab {
+                    padding: 6px 12px;
+                }
+
+                .ant-tabs-nav .ant-tabs-nav-list {
+                    padding-left: 20px;
+                }
+
+                .ant-tabs-nav {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+
+        .pc-tabs-second {
+            :global {
+                .ant-tabs-nav .ant-tabs-nav-list {
+                    padding-left: 0;
+                    padding-top: 10px;
+                }
+
+                .ant-tabs-tab-btn {
+                    width: 100%;
+                }
+            }
+
+            .pc-tabs-secord-item {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+
+        .pc-tabs-desc {
+            font-size: 13px;
+            color: #9EA0A5;
+        }
+    }
+}
+
+

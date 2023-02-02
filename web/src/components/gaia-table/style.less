@@ -1,0 +1,58 @@
+.comp-gaia-table {
+    @label-width: 70px;
+
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+
+    :global {
+        .ant-btn {
+            height: 30px;
+        }
+
+        .ant-table-thead > tr > th {
+            border-top: 1px solid rgba(158, 160, 165, 0.3);
+            padding: 16px 8px;
+            background-color: white;
+        }
+
+        .ant-table-container table > thead > tr:first-child th:first-child {
+            border-top-left-radius: 0;
+        }
+
+        .ant-table-container table > thead > tr:first-child th:last-child {
+            border-top-right-radius: 0;
+        }
+
+        .ant-table-tbody > tr > td {
+            padding: 12px 8px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .ant-pagination-item {
+            min-width: 26px;
+            height: 26px;
+            line-height: 24px;
+        }
+
+        .ant-pagination-prev,
+        .ant-pagination-next,
+        .ant-pagination-jump-prev,
+        .ant-pagination-jump-next {
+            min-width: 26px;
+            height: 26px;
+            line-height: 25px;
+        }
+
+        .ant-table-pagination.ant-pagination {
+            margin: 15px 0;
+        }
+    }
+
+    .cga-tools {
+        margin-bottom: 12px;
+    }
+}

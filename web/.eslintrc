@@ -1,0 +1,31 @@
+{
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 2017,
+        "sourceType": "module",
+        "impliedStrict": true,
+        "ecmaFeatures": {
+            "jsx": true,
+            "impliedStrict": true,
+            "globalReturn": false,
+            "experimentalObjectRestSpread": true,
+            "legacyDecorators": true,
+            "experimentalDecorators": true
+        }
+    },
+    "rules": {
+        "jsx-a11y/anchor-is-valid": 0,
+        "react-hooks/exhaustive-deps": 0,
+        "eqeqeq": 0,
+        "no-useless-constructor": 0,
+        "default-case": 0,
+        "no-sequences": 0,
+        "no-unused-vars": 0,
+        "react/jsx-no-target-blank": 0,
+        "array-callback-return": 0,
+        "no-useless-escape": 0
+    },
+    "globals": {
+        "$I18N": "readonly" // 或者true
+    }
+}

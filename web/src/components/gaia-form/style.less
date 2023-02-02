@@ -1,0 +1,87 @@
+.comp-gaia-form {
+    padding: 0 16px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+    margin-top: 16px;
+
+    &:first-of-type {
+        margin-top: 0;
+    }
+
+    :global {
+        .ant-select {
+            width: 100%;
+            display: inline-block;
+        }
+
+        .ant-space {
+            width: 100%;
+        }
+
+        .ant-space-item {
+            width: calc(33.33% - 13px);
+        }
+    }
+
+    .cgf-header {
+        height: 46px;
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        border-bottom: 1px solid #eaedf3;
+    }
+
+    .cgf-body {
+        padding: 10px 0 16px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .cgf-row {
+        > * {
+            margin-bottom: 10px;
+            align-self: flex-start;
+        }
+    }
+}
+
+.comp-gaia-form-item {
+    :global {
+        .cgfi-required:before {
+            position: absolute;
+            display: inline-block;
+            left: 0;
+            top: 3px;
+            color: #ff4d4f;
+            font-size: 14px;
+            line-height: 1;
+            content: "*";
+        }
+    }
+
+    .cgfi-label {
+        padding-left: 10px;
+        position: relative;
+        flex-shrink: 0;
+        white-space: nowrap;
+        color: #0076ff;
+        min-width: 120px;
+        text-align: right;
+    }
+
+    .cgfi-message {
+        color: #ff4d4f;
+        font-size: 13px;
+        padding-left: 4px;
+    }
+
+    .cgfi-required-star {
+        display: inline-block;
+        color: #ff4d4f;
+        font-size: 14px;
+        line-height: 1;
+        margin-right: 2px;
+    }
+}

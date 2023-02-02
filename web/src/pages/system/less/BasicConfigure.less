@@ -1,0 +1,159 @@
+.page {
+}
+
+.page-module-blank {
+    height: 16px;
+    width: 100%;
+}
+
+.comp-modal {
+    :global {
+        .ant-modal-header {
+            text-align: center;
+            padding: 28px 0;
+            border: none;
+        }
+
+        .ant-modal-title {
+            font-size: 16px;
+            font-width: 500;
+        }
+
+        .ant-modal-body {
+            padding: 0 12px;
+        }
+
+        .ant-form-horizontal .ant-form-item-control {
+            padding-left: 16px;
+        }
+
+        .ant-modal-footer {
+            border: none;
+            padding: 20px 0 32px;
+            text-align: center;
+
+            .ant-btn {
+                width: 120px;
+                height: 40px;
+                font-size: 14px;
+
+                &:nth-of-type(1) {
+                    background-color: #f2f3f6;
+                }
+
+                &:nth-of-type(2) {
+                    margin-left: 32px;
+                }
+            }
+        }
+
+        .comp-modal-desc {
+            width: calc(300% + 40px);
+        }
+    }
+
+    header {
+        display: none;
+    }
+
+    .comp-modal-item {
+        display: flex;
+        align-items: center;
+
+        > label {
+            width: 60px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+    }
+}
+
+.basicConfig-content {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 120px);
+    background-color: white;
+    padding-top: 16px;
+}
+
+.basicConfig-content::-webkit-scrollbar {
+    display: none;
+}
+
+.basicConfig-navigation-container {
+    width: 240px;
+    flex-shrink: 0;
+}
+
+.roleDetail-content {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    min-height: calc(100vh - 120px);
+    background-color: white;
+}
+
+.empty-block {
+    width: 100%;
+    height: 20px;
+    background-color: #f2f3f6;
+}
+
+.basicConfig-line {
+    width: 1px;
+    background-color: #ddd;
+}
+
+.basicConfig-action {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.basicConfig-action::-webkit-scrollbar {
+    display: none;
+}
+
+.basicConfig-action-right {
+    display: flex;
+    height: 240px;
+}
+
+.basicConfig-action-title {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    margin: 0px 24px;
+    border-bottom: 1px solid #ddd;
+}
+
+.link-actiontext {
+    cursor: pointer;
+    color: #1890ff;
+    margin-right: 8px;
+}
+
+.point-modal-desc {
+    width: 200px !important;
+}
+
+.page-childPage {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.newRole-detail {
+    display: flex;
+    height: calc(100vh - 260px);
+    overflow-y: scroll;
+}
+
+.newRole-detail::-webkit-scrollbar {
+    display: none;
+}
+
+:global(.ant-checkbox-wrapper + .ant-checkbox-wrapper) {
+    margin-left: 0px;
+}
