@@ -3,8 +3,6 @@
  * 导出服务守护进程
  */
 
-namespace Imee\Cli\Tasks;
-
 use Imee\Cli\Libs\Worker;
 use Phalcon\Di;
 

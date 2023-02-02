@@ -6,6 +6,7 @@ use Imee\Libs\Fixed\CacheXcache;
 use Imee\Libs\Fixed\Loader;
 use Imee\Libs\Fixed\RedisSession;
 use Imee\Libs\ImeeConfig;
+use OSS\OssUpload;
 use Phalcon\Mvc\Model\MetaData\Memory as MemoryMetaData;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use Phalcon\Logger;
@@ -56,7 +57,8 @@ if (ENV == 'dev') {
 require_once(APP_PATH . DS . 'libs' . DS . 'fixed' . DS . 'Functions.php');
 require_once(APP_PATH . DS . 'libs' . DS . 'fixed' . DS . 'Loader.php');
 require_once(APP_PATH . DS . 'config_define.php');
-require_once(ROOT . DS . 'comp/common/support/helpers.php');
+
+require_once(ROOT . DS . 'comp_autoload.php');
 require_once(ROOT . DS . 'vendor' . DS . 'autoload.php');
 
 $di = new CliDI();
@@ -69,7 +71,6 @@ $loader->registerNamespaces(array(
     "Imee\Libs"      => ROOT . DS . "app/libs/",
     "Imee\Service"   => ROOT . DS . "app/service/",
     "Imee\Cli\Libs"  => ROOT . DS . "cli/libs/",
-    "Imee\Cli\Tasks" => ROOT . DS . "cli/tasks/",
     "Config"         => CONFIG . "/",
     "Imee\Helper"    => ROOT . DS . "app/helper/",
     "Imee\Export"    => ROOT . DS . "app/export/",
@@ -79,7 +80,6 @@ $loader->registerNamespaces(array(
 ));
 
 $loader->registerDirs(array(
-    ROOT . DS . 'comp/common/support',
     ROOT . DS . 'cli/tasks/',
 ));
 $loader->register();

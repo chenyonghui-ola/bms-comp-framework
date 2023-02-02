@@ -1,7 +1,5 @@
 <?php
 
-namespace Imee\Cli\Tasks;
-
 use Phalcon\Di;
 
 class CliApp extends \Phalcon\CLI\Task

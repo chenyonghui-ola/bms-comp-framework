@@ -5,8 +5,6 @@
  * php cli.php test -process hello
  */
 
-namespace Imee\Cli\Tasks;
-
 class TestTask extends CliApp
 {
     public function mainAction(array $params = null)
@@ -26,7 +24,7 @@ class TestTask extends CliApp
     {
         $this->debugInfo('======== begin ========');
 
-        echo 'hello';
+        echo 'hello' . PHP_EOL;
 
         $this->debugInfo('======== end ========');
     }
