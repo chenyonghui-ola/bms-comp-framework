@@ -1,6 +1,6 @@
 <?php
 
-namespace Cli\Tasks;
+namespace Imee\Cli\Tasks;
 
 use Phalcon\Di;
 

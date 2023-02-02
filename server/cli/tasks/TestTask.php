@@ -5,7 +5,7 @@
  * php cli.php test -process hello
  */
 
-namespace Cli\Tasks;
+namespace Imee\Cli\Tasks;
 
 class TestTask extends CliApp
 {

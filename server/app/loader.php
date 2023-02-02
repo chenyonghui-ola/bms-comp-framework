@@ -8,8 +8,6 @@ $loader->registerNamespaces(array(
     "Imee\Libs" => "app/libs/",
     "Imee\Exception" => "app/exception/",
     "Imee\Service" => "app/service/",
-    "Imee\Cli\Libs" => "cli/libs/",
-    "Imee\Cli\Tasks" => "cli/tasks/",
     "Config" => CONFIG . "/",
     "Imee\Helper" => "app/helper/",
     "Imee\Export" => "app/export/",
