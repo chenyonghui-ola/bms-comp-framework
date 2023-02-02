@@ -19,11 +19,11 @@ class LesscodeLoader
         $namespaces = $this->loader->getNamespaces();
 
         $namespaceAdd = [
-            'Lesscode'                 => 'lesscode/',
-            'Imee\Schema'              => 'lesscode/schema/',
-            'Imee\Controller\Lesscode' => 'lesscode/app/controller/',
-            'Imee\Service\Lesscode'    => 'lesscode/service/',
-            'Imee\Models\Cms\Lesscode' => 'lesscode/models/',
+            'Lesscode'                 => 'comp/lesscode/',
+            'Imee\Schema'              => 'comp/lesscode/schema/',
+            'Imee\Controller\Lesscode' => 'comp/lesscode/app/controller/',
+            'Imee\Service\Lesscode'    => 'comp/lesscode/service/',
+            'Imee\Models\Cms\Lesscode' => 'comp/lesscode/models/',
         ];
 
         foreach ($namespaceAdd as &$item)

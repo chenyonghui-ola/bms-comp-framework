@@ -9,7 +9,7 @@ if (!function_exists('__T')) {
     {
         global $__T_Array;
         if (!isset($__T_Array[$lang])) {
-            $langFile = $lang . '.php';
+            $langFile = ROOT.DS.'comp/common/message'.DS.$lang . '.php';
             if (!file_exists($langFile)) {
                 throw new \Exception("$langFile not exist!");
             }

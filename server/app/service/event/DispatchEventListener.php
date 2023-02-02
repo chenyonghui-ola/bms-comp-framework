@@ -23,7 +23,7 @@ class DispatchEventListener extends EventListener
         $config = $this->getActionConfig($dispatcher);
 
         $di = $dispatcher->getDi();
-        $user = $di->getShared('user');
+        //$user = $di->getShared('user');
         $response = $di->getShared('response');
         $request = $di->getShared('request');
 
