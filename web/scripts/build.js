@@ -2,7 +2,7 @@ process.env.BABEL_ENV = "production";
 process.env.NODE_ENV = "production";
 process.env.GENERATE_SOURCEMAP = true;
 require("./utils/env");
-if (process.env.VEEKA_ENV.indexOf("prod") !== -1) {
+if (process.env.ADMIN_ENV.indexOf("prod") !== -1) {
     process.env.PUBLIC_URL = process.env.BASE_NAME;
 }
 

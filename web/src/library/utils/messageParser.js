@@ -21,7 +21,7 @@ export const formatMsg = (obj = {}) => {
                         require(`../../style/emote/${one}/${two}.${three}`).default ||
                         require(`../../style/emote/${one}/${two}.${three}`);
                 } else {
-                    file = process.env.VEEKA_IMAGE_URL + '/' + icon;
+                    file = process.env.ADMIN_IMAGE_URL + '/' + icon;
                 }
 
                 return (

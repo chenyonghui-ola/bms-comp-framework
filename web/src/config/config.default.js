@@ -6,7 +6,7 @@ export default {
     // 默认ajax超时时间
     ajaxTimeout: 1000 * 60,
     // 页面路由前缀
-    baseName: process.env.VEEKA_ENV == "prod" ? process.env.BASE_NAME : "",
+    baseName: process.env.ADMIN_ENV == "prod" ? process.env.BASE_NAME : "",
     // 是否启用mock
     mock: MOCK || NODE_ENV === "development",
     // 静态文件前缀

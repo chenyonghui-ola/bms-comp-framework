@@ -1,8 +1,8 @@
 {
-    "name": "veeka",
+    "name": "banban",
     "version": "1.0.0",
     "private": true,
-    "description": "Veeka 管理后台",
+    "description": "banban 管理后台",
     "author": "",
     "license": "ISC",
     "main": "index.js",
@@ -11,15 +11,15 @@
         "updatemodules-lesscode": "cd .. && git subtree pull --prefix=web/src/pages/lesscode git@github.com:olaola-chat/bms-lesscode-web.git master --squash",
         "pushmodules-lesscode": "cd .. && git subtree push --prefix=web/src/pages/lesscode git@github.com:olaola-chat/bms-lesscode-web.git master",
         "clean-lesscode": "rm -rf ./src/pages/lesscode",
-        "start": "cross-env VEEKA_ENV=local node scripts/start.js",
-        "start:test": "cross-env VEEKA_ENV=test node scripts/start.js",
+        "start": "cross-env ADMIN_ENV=local node scripts/start.js",
+        "start:test": "cross-env ADMIN_ENV=test node scripts/start.js",
         "build:test": "sh scripts/build.sh test",
         "build:prod": "sh scripts/build.sh prod",
         "build:dll": "rimraf scripts/dll && webpack --config scripts/config/webpack.dll.config.js",
         "build:analyz": "cross-env ANALYZ=true npm run build",
         "build:time": "cross-env ANALYZ_TIME=true npm run build",
-        "build-test": "cross-env VEEKA_ENV=test node scripts/build.js",
-        "build-prod": "cross-env VEEKA_ENV=prod node scripts/build.js"
+        "build-test": "cross-env ADMIN_ENV=test node scripts/build.js",
+        "build-prod": "cross-env ADMIN_ENV=prod node scripts/build.js"
     },
     "dependencies": {
         "@ant-design/icons": "^4.0.3",
