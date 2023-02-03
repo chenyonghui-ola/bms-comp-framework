@@ -99,7 +99,7 @@ function update($handleData)
         $commandStr .= " && mv {$movePath}/ ./";
         $commandStr .= " && rm -rf .git";
         passthru($commandStr);
-        
+
         //更新自动加载文件
         autoloadAdd($item);
         //同步版本号
@@ -142,6 +142,13 @@ function autoloadAdd($item)
     if (!empty($item['autoload_file'])) {
         $file = $item['save_path'] . '/' . $item['autoload_file'];
         $file = "require_once(ROOT . DS . '{$file}');";
+
+        //判断是否已经加载
+        $content = file_get_contents($autoloadFile);
+        if (strstr($content, $file)) {
+            return;
+        }
+
         file_put_contents($autoloadFile, $file . PHP_EOL, FILE_APPEND);
     }
 }
