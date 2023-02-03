@@ -98,12 +98,12 @@ function update($handleData)
         } else {
             $commandStr .= " && git pull origin master";
         }
-        $movePath = $pullPath ?: $module;
         $commandStr .= " && rm -rf .git";
-        $commandStr .= " && mv {$movePath}/* ./";
-        $commandStr .= " && rm -rf {$movePath}/";
-
-        echo $commandStr.PHP_EOL;
+        if ($pullPath) {
+            $commandStr .= " && mv {$pullPath}/* ./";
+            $commandStr .= " && rm -rf {$pullPath}/";
+        }
+        echo $commandStr . PHP_EOL;
         passthru($commandStr);
 
         //更新自动加载文件
