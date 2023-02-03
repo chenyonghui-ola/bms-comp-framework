@@ -9,8 +9,8 @@ $autoloadFile = "./comp/autoload.php";
 $config = "./comp.ini";
 $configData = parse_ini_file($config, true);
 
-if (empty($argv[1]) || !in_array($argv[1], ['install', 'update', 'delete'])) {
-    echo '参数缺失,传参：install 安装 update 更新 delete 删除' . PHP_EOL;
+if (empty($argv[1]) || !in_array($argv[1], ['update', 'delete'])) {
+    echo '参数缺失,传参：update 安装/更新 delete 删除' . PHP_EOL;
     exit;
 }
 
@@ -50,37 +50,7 @@ function delete($handleData)
     exit;
 }
 
-//支持新增
-function install($handleData)
-{
-    foreach ($handleData as $module => $item) {
-        echo 'install start:' . $module . PHP_EOL;
-        //下载模块
-        $dir = dirname(__FILE__) . '/' . $item['save_path'];
-        $pullPath = $item['pull_path'];
-        $gitRemote = $item['git_remote'];
-        passthru("mkdir -p $dir");
-        $commandStr = "cd $dir";
-        $commandStr .= " && git init";
-        $commandStr .= " && git config core.sparsecheckout true";
-        $commandStr .= " && echo '{$pullPath}/' >> .git/info/sparse-checkout";
-        $commandStr .= " && git remote add origin $gitRemote";
-        $commandStr .= " && git pull origin master";
-        $commandStr .= " && mv {$pullPath}/ ./";
-        $commandStr .= " && rm -rf .git";
-        passthru($commandStr);
-        //更新自动加载文件
-        autoloadAdd($item);
-        //同步版本号
-        syncVersion($item['save_path'], $item['version']);
-        //提交git
-        gitCommit('install 模块' . $module);
-        echo 'install done:' . $module . PHP_EOL;
-    }
-
-    exit;
-}
-
+//安装模块
 //支持全量更新 判断当前版本号是否一致一样的不更新
 //支持按模块名称更新 判断当前版本号是否一致一样的不更新
 //如果模块有autoload_file配置需要更新到comp_autoload.php文件里
@@ -89,7 +59,57 @@ function install($handleData)
 //更新完成后生成一个version文件记录当前版本号，如果版本号为空的始终允许更新
 function update($handleData)
 {
+    foreach ($handleData as $module => $item) {
+        echo 'update start:' . $module . PHP_EOL;
 
+        $version = $item['version'] ?? '';
+        $savePath = $item['save_path'];
+        $pullPath = $item['pull_path'] ?? '';
+        $gitRemote = $item['git_remote'];
+
+        //先判断当前版本
+        $versionFile = dirname(__FILE__) . '/' . $savePath . '/version';
+        $localVersion = '';
+        if (is_file($versionFile)) {
+            $localVersion = file_get_contents($versionFile);
+        }
+        if ($localVersion && $localVersion == $version) {
+            echo '版本一致无需更新' . PHP_EOL;
+            continue;
+        }
+
+        //下载模块
+        $dir = dirname(__FILE__) . '/' . $savePath;
+        passthru("mkdir -p $dir");
+
+        $commandStr = "cd $dir";
+        $commandStr .= " && git init";
+        if ($pullPath) {
+            $commandStr .= " && git config core.sparsecheckout true";
+            $commandStr .= " && echo '{$pullPath}/' >> .git/info/sparse-checkout";
+        }
+        if ($version) {
+            $commandStr .= " && git fetch origin tag $version";
+            $commandStr .= " && git checkout $version";
+        } else {
+            $commandStr .= " && git remote add origin $gitRemote";
+            $commandStr .= " && git pull origin master";
+        }
+        $movePath = $pullPath ?: $module;
+        $commandStr .= " && mv {$movePath}/ ./";
+        $commandStr .= " && rm -rf .git";
+        passthru($commandStr);
+        
+        //更新自动加载文件
+        autoloadAdd($item);
+        //同步版本号
+        syncVersion($item['save_path'], $item['version']);
+        //提交git
+        gitCommit('update 模块' . $module);
+        echo 'update done:' . $module . PHP_EOL;
+    }
+
+    exit;
 }
 
 function syncVersion($savePath, $version)
