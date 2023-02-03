@@ -86,18 +86,21 @@ function update($handleData)
         $commandStr .= " && git init";
         if ($pullPath) {
             $commandStr .= " && git config core.sparsecheckout true";
-            $commandStr .= " && echo '{$pullPath}/' >> .git/info/sparse-checkout";
+            $commandStr .= " && echo '/{$pullPath}/' >> .git/info/sparse-checkout";
         }
+        $commandStr .= " && git remote add origin $gitRemote";
         if ($version) {
             $commandStr .= " && git fetch origin tag $version";
+            $commandStr .= " && git tag";
             $commandStr .= " && git checkout $version";
         } else {
-            $commandStr .= " && git remote add origin $gitRemote";
             $commandStr .= " && git pull origin master";
         }
         $movePath = $pullPath ?: $module;
-        $commandStr .= " && mv {$movePath}/ ./";
-        $commandStr .= " && rm -rf .git";
+        $commandStr .= " && ls | grep -v $movePath | xargs rm -rf";
+        $commandStr .= " && mv -f {$movePath}/ ./";
+
+        echo $commandStr.PHP_EOL;
         passthru($commandStr);
 
         //更新自动加载文件
