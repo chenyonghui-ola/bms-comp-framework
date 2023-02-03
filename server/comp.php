@@ -97,8 +97,9 @@ function update($handleData)
             $commandStr .= " && git pull origin master";
         }
         $movePath = $pullPath ?: $module;
-        $commandStr .= " && ls | grep -v $movePath | xargs rm -rf";
-        $commandStr .= " && mv -f {$movePath}/ ./";
+        $commandStr .= " && rm -rf .git";
+        $commandStr .= " && mv {$movePath}/* ./";
+        $commandStr .= " && rm -rf {$movePath}/";
 
         echo $commandStr.PHP_EOL;
         passthru($commandStr);
