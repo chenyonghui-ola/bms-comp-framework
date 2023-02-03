@@ -29,7 +29,7 @@ require_once(APP_PATH . DS . 'libs' . DS . 'fixed' . DS . 'Loader.php');
 require_once(APP_PATH . DS . 'config_define.php');
 require_once(APP_PATH . DS . 'ImeeApplication.php');
 
-require_once(ROOT . DS . 'comp_autoload.php');
+require_once(ROOT . DS . 'comp' . DS . 'autoload.php');
 require_once(ROOT . DS . 'vendor' . DS . 'autoload.php');
 
 ImeeApplication::instance()->run();

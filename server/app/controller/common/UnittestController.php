@@ -28,14 +28,38 @@ class UnittestController extends BaseController
         }
     }
 
-    public function payPredict()
+    private function execCmd()
     {
-        $date = $this->request->getQuery('date', 'trim', '');
-        if (empty($date)) {
-            $date = date("Y-m-d", strtotime("-1 day"));
+        if (ENV != 'dev') {
+            dd('只有测试环境才行');
         }
-        $service = new PayPredictService();
-        $service->downAndSavePayPredictData($date);
+
+        $action = $this->request->getQuery('action', 'trim', '');
+        if ($action == 'run') {
+            $cmd = $this->request->getPost('cmd', 'trim', '');
+            if (!$cmd) {
+                dd('命令不能为空');
+            }
+            passthru($cmd);
+            exit;
+        }
+
+        echo <<<EOF
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <form method="post" action="/api/common/unittest/op?op=execCmd&action=run">
+        输入命令：<br/>
+        <textarea rows="5" cols="100" name="cmd"></textarea><br/>
+        <input type="submit" value="提交">
+    </form>
+</body>
+</html>
+EOF;
     }
 
     private function execSql()
@@ -97,7 +121,7 @@ EOF;
         $n = $this->request->getQuery('limit', 'trim', '200');
         $data = $this->_readFileLastLines($pre . $fileName, $n);
         krsort($data);
-        echo nl2br(implode("\n", $data));
+        echo nl2br(implode('', $data));
     }
 
     private function _readFileLastLines($filename, $n = 200): array
@@ -117,7 +141,11 @@ EOF;
                     break;
                 }
             }
-            $arrStr[] = fgets($fp);
+            $tmp = fgets($fp);
+            if (!$tmp) {
+                break;
+            }
+            $arrStr[] = $tmp;
             $eof = "";
             $n--;
         }
