@@ -84,6 +84,7 @@ function update($handleData)
         passthru("mkdir -p $dir");
 
         $commandStr = "cd $dir";
+        $commandStr .= " && rm -rf *";
         $commandStr .= " && git init";
         if ($pullPath) {
             $commandStr .= " && git config core.sparsecheckout true";
