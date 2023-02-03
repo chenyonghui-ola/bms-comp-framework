@@ -42,7 +42,7 @@ function delete($handleData)
         //清除autoload.php里该文件的加载
         autoloadCancel($item);
         //提交git
-        gitCommit('del 模块' . $module);
+        gitCommit('delete 模块' . $module);
 
         echo 'delete done:' . $module . PHP_EOL;
     }
@@ -55,8 +55,26 @@ function install($handleData)
 {
     foreach ($handleData as $module => $item) {
         echo 'install start:' . $module . PHP_EOL;
-
+        //下载模块
+        $dir = dirname(__FILE__) . '/' . $item['save_path'];
+        $pullPath = $item['pull_path'];
+        $gitRemote = $item['git_remote'];
+        passthru("mkdir -p $dir");
+        $commandStr = "cd $dir";
+        $commandStr .= " && git init";
+        $commandStr .= " && git config core.sparsecheckout true";
+        $commandStr .= " && echo '{$pullPath}/' >> .git/info/sparse-checkout";
+        $commandStr .= " && git remote add origin $gitRemote";
+        $commandStr .= " && git pull origin master";
+        $commandStr .= " && mv {$pullPath}/ ./";
+        $commandStr .= " && rm -rf .git";
+        passthru($commandStr);
+        //更新自动加载文件
+        autoloadAdd($item);
+        //同步版本号
         syncVersion($item['save_path'], $item['version']);
+        //提交git
+        gitCommit('install 模块' . $module);
         echo 'install done:' . $module . PHP_EOL;
     }
 
@@ -111,8 +129,7 @@ function autoloadAdd($item)
 function gitCommit($msg)
 {
     $dir = dirname(__FILE__) . '/comp';
-    passthru("cd $dir");
-    passthru("git add .");
+    passthru("cd $dir && git add .");
     passthru("git commit -m '" . $msg . "'");
     //passthru("git push");
 }
