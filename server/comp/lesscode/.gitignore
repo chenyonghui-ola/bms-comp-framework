@@ -1,9 +1,0 @@
-service/sql/bms*
-service/sql/cms*
-service/sql/xss*
-service/sql/xsst*
-service/sql/config*
-service/sql/bbc*
-service/sql/ka*
-
-.idea
