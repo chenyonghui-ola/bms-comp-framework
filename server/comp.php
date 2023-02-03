@@ -21,6 +21,7 @@ if ($module == 'all') {
 } else {
     if (empty($configData[$module])) {
         echo '该模块未配置：' . $module . PHP_EOL;
+        exit;
     }
     $handleData = [$module => $configData[$module]];
 }
