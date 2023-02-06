@@ -2,8 +2,6 @@
 
 namespace Imee\Models\Beanstalkd;
 
-use Imee\Comp\Common\Beanstalkd\Client;
-
 class DemoBeanstalkd extends BaseBeanstalkd
 {
     const TOPIC_PUSH_MESSAGE = 'xs.user_push_message';
