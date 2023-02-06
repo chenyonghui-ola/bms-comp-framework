@@ -3,6 +3,10 @@
 namespace Imee\Libs;
 
 use Imee\Exception\ApiException;
+use Illuminate\Validation\Factory;
+use Illuminate\Translation\Translator;
+use Illuminate\Translation\FileLoader;
+use Illuminate\Filesystem\Filesystem;
 
 abstract class Validator
 {
@@ -33,12 +37,12 @@ abstract class Validator
         if (self::$factory === null) {
             $translationPath = __DIR__.'/lang';
             
-            $translationFileLoader = new \Illuminate\Translation\FileLoader(
-                new \Illuminate\Filesystem\Filesystem(),
+            $translationFileLoader = new FileLoader(
+                new Filesystem(),
                 $translationPath
             );
-            $translator = new \Illuminate\Translation\Translator($translationFileLoader, VALIDATION_LANG);
-            self::$factory = new \Illuminate\Validation\Factory($translator);
+            $translator = new Translator($translationFileLoader, VALIDATION_LANG);
+            self::$factory = new Factory($translator);
         }
         return new static();
     }
