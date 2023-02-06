@@ -2,10 +2,12 @@
 
 namespace Imee\Models\Bi;
 
+use OSS\OssUpload;
+
 /**
- * hive类型数据下载
+ * 非hive类数据下载
  */
-class DemoBi extends BaseBi
+class Demo2Bi extends BaseBi
 {
     /**
      * 下载文件
@@ -15,10 +17,15 @@ class DemoBi extends BaseBi
      */
     public static function downFile($date): array
     {
-        $path = 'dw/dws_out/xx/';
+        $path = 'recommend/offline_user_prediction_veeka/svip_predict/svip_prediction_results/';
 
+        $bucket = OssUpload::EMR;
+        if (ENV == 'dev') {
+            $bucket = OssUpload::BUCKET_DEV;
+        }
         //下载文件
-        $tmpFiles = self::downLoad($date, $path);
+        self::setLineSeparator("\t");
+        $tmpFiles = self::downLoadNotHive($date, $path, $bucket);
 
         //失败
         if (!$tmpFiles) {
@@ -38,7 +45,7 @@ class DemoBi extends BaseBi
     {
         //文件的字段
         $columns = [
-            'uid', 'region_name', 'gid1', 'consume_money', 'consume_cnt'
+            'uid', 'predict_type', 'predict_time'
         ];
         //读取文件内容
         return self::readData($tmpFiles, $columns);

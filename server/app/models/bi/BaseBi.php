@@ -1,6 +1,6 @@
 <?php
 
-namespace Imee\Model\Bi;
+namespace Imee\Models\Bi;
 
 use OSS\OssClient;
 use OSS\OssUpload;
@@ -20,7 +20,15 @@ class BaseBi
         self::$lineSeparator = $str;
     }
 
-    public static function downLoadPredict($date, $path, string $bucket = OssUpload::BUCKET_DEV): array
+    /**
+     * 非hive类数据
+     * @param $date
+     * @param $path
+     * @param string $bucket
+     * @return array
+     * @throws \OSS\Core\OssException
+     */
+    public static function downLoadNotHive($date, $path, string $bucket = OssUpload::BUCKET_DEV): array
     {
         if (date('Y-m-d', strtotime($date)) != $date) {
             $date = date('Y-m-d', strtotime($date));
@@ -51,7 +59,7 @@ class BaseBi
                 return [];
             }
 
-            self::downLoadPredict($date, $path, $bucket);
+            self::downLoadNotHive($date, $path, $bucket);
             return [];
         }
         self::console('文件获取成功，开始保存到本地>>>');
@@ -74,11 +82,12 @@ class BaseBi
     }
 
     /**
-     * 下载的文件，返回本地文件路径数组
+     * 下载的文件，返回本地文件路径数组 通用 hive
      * @param $date
      * @param $path
      * @param string $bucket
      * @return array
+     * @throws \OSS\Core\OssException
      */
     public static function downLoad($date, $path, string $bucket = OssUpload::EMR): array
     {

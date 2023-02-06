@@ -4,27 +4,12 @@ namespace Imee\Models\Cms;
 
 use Imee\Models\Traits\ChangeTrait;
 use Imee\Models\Traits\ModelLogTrait;
-use Imee\Models\Logcontext\LogBaseContext;
 
 class CmsUser extends BaseModel
 {
     use ChangeTrait, ModelLogTrait;
 
     protected static $primaryKey = 'user_id';
-
-    /**
-     * 日志类的全路径
-     * @var string
-     */
-    private $recordLog = CmsUserLog::class;
-
-    /**
-     * 日志context类的全路径
-     * @var string
-     */
-    private $logContext = LogBaseContext::class;
-
-    private $logPrimaryKey = 'user_id';
 
     const USER_STATUS_INVALID = 0;
     const USER_STATUS_VALID = 1;
@@ -40,12 +25,6 @@ class CmsUser extends BaseModel
         self::IS_SALT_YES => '有二次验证',
         self::IS_SALT_NO  => '无二次验证',
     ];
-
-    public function initialize()
-    {
-        parent::initialize();
-        $this->setLogEventsManager();
-    }
 
     /**
      * 获取用户名list
@@ -85,54 +64,22 @@ class CmsUser extends BaseModel
         return array_column($data, null, 'user_id');
     }
 
-    /**
-     * @param array $condition
-     * @return \Phalcon\Mvc\Model\Query\Builder
-     */
-    public static function queryBuilder(array $condition=[])
+    public static function getKfNameById($kfId = 0)
     {
-        $query = static::baseQueryBuilder($condition);
-        foreach ($condition as $key => $value) {
-            switch ($key) {
-                case 'user_name_like':
-                    $query->andWhere('user_name like :user_name_like:', ['user_name_like' => '%'.$value.'%']);
-                    break;
-                case 'user_id':
-                    $query->andWhere('user_id = :user_id:', ['user_id' => $value]);
-                    break;
-                case 'user_id_array':
-                    $query->inWhere('user_id', $value);
-                    break;
-                case 'system_id':
-                    $query->andWhere('system_id = :system_id:', ['system_id' => $value]);
-                    break;
-                case 'columns':
-                    // 查询的字段
-                    $query->columns($value);
-                    break;
-                default:
-                    break;
-            }
+        static $_kfMap = [];
+
+        if (empty($kfId)) {
+            return '';
         }
-        return $query;
+
+        if (isset($_kfMap[$kfId])) {
+            return $_kfMap[$kfId];
+        }
+
+        $res = self::findFirst($kfId);
+
+        $_kfMap[$kfId] = empty($res) ? '' : $res->user_name;
+
+        return $_kfMap[$kfId];
     }
-
-	public static function getKfNameById($kfId = 0)
-	{
-		static $_kfMap = [];
-
-		if (empty($kfId)) {
-			return '';
-		}
-
-		if (isset($_kfMap[$kfId])) {
-			return $_kfMap[$kfId];
-		}
-
-		$res = self::findFirst($kfId);
-
-		$_kfMap[$kfId] = empty($res) ? '' : $res->user_name;
-
-		return $_kfMap[$kfId];
-	}
 }
