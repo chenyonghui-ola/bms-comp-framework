@@ -15,7 +15,7 @@ define('APP_VEEKA', 11);
 // 系统id: cms_user 表 system_id
 define('SYSTEM_ID', 4);
 // model缓存
-define('MODEL_CACHE_LIFETIME', 120);
+define('MODEL_CACHE_LIFETIME', 86400);
 
 // OSS
 define('OSS_IMAGE_URL_WEB', 'http://xs-image.starifymusic.com');//线上外网域名
@@ -41,5 +41,6 @@ define('EXPORTEXLS_QUEUE_NAME', 'veekanew.exportexl');
 define('SESSION_UNIQUE', 'veeka-new-');
 define('SESSION_PRIFIX', 'vk_new_');
 define('SESSION_NAME', '_VEEKANEW');
+define('SESSION_LIFETIME', 86400);
 
 

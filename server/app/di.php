@@ -116,7 +116,7 @@ foreach ($databaseConfigs as $dbname => $config) {
 //缓存model结构和sql
 $di->set('modelsMetadata', function () {
     return new XcacheMetaData(array(
-        "lifetime" => (ENV == 'dev') ? 1 : 86400,
+        "lifetime" => (ENV == 'dev') ? 1 : MODEL_CACHE_LIFETIME,
         "prefix"   => "model-meta"
     ));
 });
@@ -164,7 +164,7 @@ $di->set('redis', function () {
 $di->set('session', function () {
     $session = new RedisSession(array(
         'uniqueId' => SESSION_UNIQUE,
-        'lifetime' => 86400,
+        'lifetime' => SESSION_LIFETIME,
         'prefix'   => SESSION_PRIFIX
     ));
     $session->setName(SESSION_NAME);

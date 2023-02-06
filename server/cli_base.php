@@ -79,7 +79,7 @@ $loader->registerNamespaces(array(
 ));
 
 $loader->registerDirs(array(
-    ROOT . DS . 'cli/tasks/',
+    ROOT . DS . 'cli/tasks/',//tasks目录需要引入，无法使用注册命名空间引入
 ));
 $loader->register();
 
@@ -87,7 +87,6 @@ $console = new ConsoleApp();
 $console->setDI($di);
 
 $di->setShared('console', $console);
-
 
 $di->set('modelsMetadata', function () {
     return new MemoryMetaData();
@@ -168,7 +167,7 @@ $di->set('redis', function () {
 $di->set('session', function () {
     $session = new RedisSession(array(
         'uniqueId' => SESSION_UNIQUE,
-        'lifetime' => 86400,
+        'lifetime' => SESSION_LIFETIME,
         'prefix'   => SESSION_PRIFIX
     ));
     $session->setName(SESSION_NAME);
