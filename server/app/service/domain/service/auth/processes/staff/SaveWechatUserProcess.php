@@ -22,8 +22,8 @@ class SaveWechatUserProcess
 
     public function handle()
     {
-        addTmpLog('saveWechatUser $data:');
-        addTmpLog($this->context->toArray());
+        add_tmp_log('saveWechatUser $data:');
+        add_tmp_log($this->context->toArray());
 
         if (empty($this->context->userId)) {
             return false;

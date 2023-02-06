@@ -47,8 +47,8 @@ if (!function_exists("xcache_get")) {
     }
 }
 
-if (!function_exists("addTmpLog")) {
-    function addTmpLog($content, $filename = '')
+if (!function_exists("add_tmp_log")) {
+    function add_tmp_log($content, $filename = '')
     {
         if (empty($filename)) {
             $filename = '/tmp/admin_' . date('Ymd') . '.log';
